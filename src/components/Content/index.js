@@ -1,3 +1,6 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable react/function-component-definition */
+
 import PropTypes from 'prop-types';
 
 import Card from 'src/components/Card';

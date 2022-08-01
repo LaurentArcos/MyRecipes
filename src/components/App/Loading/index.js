@@ -1,3 +1,6 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable react/function-component-definition */
+
 import './style.scss';
 
 const Loading = () => (

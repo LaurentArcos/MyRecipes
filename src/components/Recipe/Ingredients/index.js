@@ -1,3 +1,6 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable react/function-component-definition */
+
 // == Import : npm
 import PropTypes from 'prop-types';
 

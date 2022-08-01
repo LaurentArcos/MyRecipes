@@ -1,3 +1,6 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable react/function-component-definition */
+
 import Page from 'src/components/Page';
 import AppHeader from 'src/components/AppHeader';
 import Content from 'src/components/Content';

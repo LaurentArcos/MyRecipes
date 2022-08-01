@@ -1,4 +1,6 @@
 /* eslint-disable arrow-body-style */
+/* eslint-disable react/function-component-definition */
+
 // == Import : npm
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';

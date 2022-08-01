@@ -1,3 +1,6 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable react/function-component-definition */
+
 import { useSelector } from 'react-redux';
 
 import './style.scss';
