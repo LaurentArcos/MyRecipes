@@ -1,5 +1,8 @@
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Menu from 'src/components/Menu';
 import Home from 'src/components/Home';
@@ -10,8 +13,29 @@ import Loading from './Loading';
 
 import './style.scss';
 
-function App(props) {
-  if (props.loading) {
+function App() {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/recipes')
+      .then((res) => {
+        dispatch({
+          type: 'SET_RECIPES',
+          payload: {
+            recipes: res.data,
+          },
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
     return <Loading />;
   }
   return (
@@ -36,3 +60,4 @@ App.defaultProps = {
 };
 
 export default App;
+
