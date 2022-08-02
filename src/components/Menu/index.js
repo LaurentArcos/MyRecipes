@@ -6,12 +6,13 @@ import { NavLink } from 'react-router-dom';
 
 import './style.scss';
 
-const Menu = () => {
+function Menu() {
   const recipes = useSelector((state) => state.recipes);
   return (
     <nav className="menu">
       <NavLink
-        className="menu-link menu-link--active"
+        className={({ isActive }) =>
+          isActive ? 'menu-link menu-link--active' : 'menu-link'}
         to="/"
       >
         Accueil
@@ -19,7 +20,8 @@ const Menu = () => {
       {Array.from(recipes).map((recipe) => (
         <NavLink
           key={recipe.id}
-          className="menu-link"
+          className={({ isActive }) =>
+            isActive ? 'menu-link menu-link--active' : 'menu-link'}
           to={`/recipe/${recipe.slug}`}
         >
           {recipe.title}
