@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import './style.scss';
 
 function Menu() {
-  const recipes = useSelector((state) => state.recipes);
+  const recipes = useSelector((state) => state.recipes.list);
   return (
     <nav className="menu">
       <NavLink
@@ -17,7 +17,7 @@ function Menu() {
       >
         Accueil
       </NavLink>
-      {Array.from(recipes).map((recipe) => (
+      {recipes.map((recipe) => (
         <NavLink
           key={recipe.id}
           className={({ isActive }) =>
