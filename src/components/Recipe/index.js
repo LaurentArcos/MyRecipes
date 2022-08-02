@@ -2,7 +2,7 @@
 /* eslint-disable react/function-component-definition */
 
 // == Import : npm
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { findRecipe } from 'src/selectors/recipes';
@@ -23,25 +23,27 @@ function Recipe() {
   const recipe = useSelector((state) => findRecipe(state.recipes.list, 'crepes-raffinees'));
 
   if (!recipe) {
-    return <Navigate to="/error" replace={true} />;
+    return <Navigate to="/error" replace />;
   }
   return (
     <Page>
       <AppHeader />
-      <div className="recipe">
-        <Header
-          name={recipe.title}
-          thumbnail={recipe.thumbnail}
-          author={recipe.author}
-          difficulty={recipe.difficulty}
-        />
-        <Ingredients
-          list={recipe.ingredients}
-        />
-        <Instructions
-          steps={recipe.instructions}
-        />
-      </div>
+      <Link to={`/recipe/${recipe.slug}`}>
+        <div className="recipe">
+          <Header
+            name={recipe.title}
+            thumbnail={recipe.thumbnail}
+            author={recipe.author}
+            difficulty={recipe.difficulty}
+          />
+          <Ingredients
+            list={recipe.ingredients}
+          />
+          <Instructions
+            steps={recipe.instructions}
+          />
+        </div>
+      </Link>
     </Page>
   );
 }
