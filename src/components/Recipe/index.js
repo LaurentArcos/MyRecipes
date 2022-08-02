@@ -1,8 +1,6 @@
 /* eslint-disable arrow-body-style */
-/* eslint-disable react/function-component-definition */
-
 // == Import : npm
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { findRecipe } from 'src/selectors/recipes';
@@ -20,7 +18,8 @@ import './style.scss';
 
 // == Composant
 function Recipe() {
-  const recipe = useSelector((state) => findRecipe(state.recipes.list, 'crepes-raffinees'));
+  const { slug } = useParams();
+  const recipe = useSelector((state) => findRecipe(state.recipes.list, slug));
 
   if (!recipe) {
     return <Navigate to="/error" replace />;
@@ -28,22 +27,20 @@ function Recipe() {
   return (
     <Page>
       <AppHeader />
-      <Link to={`/recipe/${recipe.slug}`}>
-        <div className="recipe">
-          <Header
-            name={recipe.title}
-            thumbnail={recipe.thumbnail}
-            author={recipe.author}
-            difficulty={recipe.difficulty}
-          />
-          <Ingredients
-            list={recipe.ingredients}
-          />
-          <Instructions
-            steps={recipe.instructions}
-          />
-        </div>
-      </Link>
+      <div className="recipe">
+        <Header
+          name={recipe.title}
+          thumbnail={recipe.thumbnail}
+          author={recipe.author}
+          difficulty={recipe.difficulty}
+        />
+        <Ingredients
+          list={recipe.ingredients}
+        />
+        <Instructions
+          steps={recipe.instructions}
+        />
+      </div>
     </Page>
   );
 }
