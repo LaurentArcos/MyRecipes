@@ -15,7 +15,7 @@ const Menu = () => {
       >
         Accueil
       </a>
-      {recipes.map((recipe) => (
+      {Array.from(recipes).map((recipe) => (
         <a
           key={recipe.id}
           className="menu-link"

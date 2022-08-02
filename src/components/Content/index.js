@@ -13,7 +13,7 @@ const Content = ({ title, text, recipes }) => (
     <p className="content-text">{text}</p>
     {recipes && (
       <div className="content-list">
-        {recipes.map((recipe) => (
+        {Array.from(recipes).map((recipe) => (
           <Card key={recipe.id} {...recipe} />
         ))}
       </div>
