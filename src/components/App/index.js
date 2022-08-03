@@ -27,8 +27,8 @@ function App() {
           },
         });
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(() => {
+        alert('ERREUR !');
       })
       .finally(() => {
         setLoading(false);
@@ -60,4 +60,3 @@ App.defaultProps = {
 };
 
 export default App;
-
