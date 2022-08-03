@@ -1,4 +1,4 @@
-import { findRecipe } from "../../src/selectors/recipes";
+import { findRecipe, recipesTitle } from "../../src/selectors/recipes";
 import data from 'src/data';
 
 describe('findRecipe', () => {
@@ -23,9 +23,35 @@ describe('findRecipe', () => {
             }
         });
 
-        it('should return undefined if slug is bidoning', () => {
-            expect(findRecipe(data, 'lola-tacos-muchos-buenos')).toBeUndefined();
+        it('should return undefined if slug is not found', () => {
+            expect(findRecipe(data, 'lola-tacos-muchos-buenos'))
+                .toBeUndefined();
         });
     });
 });
 
+describe('recipesTitle', () => {
+    describe('structure', () => {
+        it('should be a function', () => {
+            expect(typeof recipesTitle).toBe('function');
+        });
+
+        it('should return a string', () => {
+            expect(typeof recipesTitle()).toBe('string');
+        });
+    });
+
+    describe('execution', () => {
+        it('should return a title by default', () => {
+            expect(recipesTitle()).toEqual('Découvrez prochainement nos recettes.');
+        });
+
+        it('should return a specific title for 1 recipe', () => {
+            expect(recipesTitle([data[0]])).toEqual('Découvrez notre recette.');
+        });
+
+        it('should return a specific title for all recipes containing the number', () => {
+            expect(recipesTitle(data)).toEqual(`Découvrez nos ${data.length} recettes.`);
+        });
+    });
+});

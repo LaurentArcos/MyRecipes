@@ -1,24 +1,24 @@
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable arrow-body-style */
-/* eslint-disable react/function-component-definition */
-
 import { useSelector } from 'react-redux';
-
 import Page from 'src/components/Page';
 import AppHeader from 'src/components/AppHeader';
 import Content from 'src/components/Content';
+import { recipesTitle } from '../../selectors/recipes';
 
-const Home = () => {
+function Home() {
   const recipes = useSelector((state) => state.recipes.list);
+  const title = useSelector((state) => recipesTitle(state.recipes.list));
+
   return (
     <Page>
       <AppHeader />
       <Content
         title="Les recettes oRecipes"
-        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, explicabo."
+        text={title}
         recipes={recipes}
       />
     </Page>
   );
-};
-
+}
 export default Home;

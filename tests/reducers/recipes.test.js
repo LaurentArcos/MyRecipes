@@ -21,9 +21,9 @@ describe('reducer for recipes', () => {
             ];
             //J'appelle pour ça mon action creator (setRecipesList)
             const action = setRecipesList(list);
-            // Je passe cette action à mon appel du reducer
+            //Je passe cette action à mon appel du reducer
             expect(reducer(initialState, action)).toEqual({
-                list,
+                list: list,
                 loading: false
             });
         });

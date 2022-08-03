@@ -1,8 +1,6 @@
-import axios from 'axios';
-import PropTypes from 'prop-types';
 import { Route, Routes } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Menu from 'src/components/Menu';
 import Home from 'src/components/Home';
@@ -12,27 +10,14 @@ import Error from 'src/components/Error';
 import Loading from './Loading';
 
 import './style.scss';
+import { fetchRecipes } from '../../actions/recipes';
 
 function App() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const loading = useSelector((state) => state.recipes.loading);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/recipes')
-      .then((res) => {
-        dispatch({
-          type: 'SET_RECIPES',
-          payload: {
-            recipes: res.data,
-          },
-        });
-      })
-      .catch(() => {
-        alert('ERREUR !');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    dispatch(fetchRecipes());
   }, []);
 
   if (loading) {
@@ -50,13 +35,5 @@ function App() {
     </div>
   );
 }
-
-App.propTypes = {
-  loading: PropTypes.bool,
-};
-
-App.defaultProps = {
-  loading: false,
-};
 
 export default App;
