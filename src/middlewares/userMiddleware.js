@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN } from '../actions/user';
+import { LOGIN, setUser } from '../actions/user';
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -14,7 +14,9 @@ const userMiddleware = (store) => (next) => (action) => {
       // J'envoie ma requête en POST via axios sur localhost:3001/login
       axios.post('http://localhost:3001/login', { email, password })
         .then((res) => {
-          console.log(res.data);
+          const { pseudo, token } = res.data;
+
+          store.dispatch(setUser(pseudo, token));
         })
         .catch((err) => {
           console.err(err);
