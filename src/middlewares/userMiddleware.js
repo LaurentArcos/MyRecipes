@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN, setUser } from '../actions/user';
+import { LOGIN, LOGOUT, setUser } from '../actions/user';
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -16,6 +16,12 @@ const userMiddleware = (store) => (next) => (action) => {
         .then((res) => {
           const { pseudo, token } = res.data;
 
+          // localStorage n'accepte que des chaînes de caractères !
+          // nous devons donc transformer notre object en string via JSON.stringify
+          localStorage.setItem('user', JSON.stringify({
+            pseudo,
+            token,
+          }));
           store.dispatch(setUser(pseudo, token));
         })
         .catch((err) => {
@@ -26,6 +32,11 @@ const userMiddleware = (store) => (next) => (action) => {
       // ?
       // Si ça échoue
       // J'affiche une erreur
+      break;
+    }
+
+    case LOGOUT: {
+      localStorage.removeItem('user');
       break;
     }
 

@@ -11,12 +11,17 @@ import Loading from './Loading';
 
 import './style.scss';
 import { fetchRecipes } from '../../actions/recipes';
+import { setUser } from '../../actions/user';
 
 function App() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.recipes.loading);
 
   useEffect(() => {
+    const loggedUser = JSON.parse(localStorage.getItem('user'));
+    if (loggedUser) {
+      dispatch(setUser(loggedUser.pseudo, loggedUser.token));
+    }
     dispatch(fetchRecipes());
   }, []);
 
