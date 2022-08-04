@@ -12,10 +12,13 @@ import Loading from './Loading';
 import './style.scss';
 import { fetchRecipes } from '../../actions/recipes';
 import { setUser } from '../../actions/user';
+import Fav from '../Fav';
 
 function App() {
   const dispatch = useDispatch();
+
   const loading = useSelector((state) => state.recipes.loading);
+  const logged = useSelector((state) => state.user.logged);
 
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem('user'));
@@ -35,6 +38,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recipe/:slug" element={<Recipe />} />
+        {logged && <Route path="/favorites" element={<Fav />} />}
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

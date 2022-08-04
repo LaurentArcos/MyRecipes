@@ -37,6 +37,7 @@ const userMiddleware = (store) => (next) => (action) => {
 
     case LOGOUT: {
       localStorage.removeItem('user');
+      next(action);
       break;
     }
 
