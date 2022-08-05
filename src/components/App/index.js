@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -15,6 +15,8 @@ import { setUser } from '../../actions/user';
 import Fav from '../Fav';
 
 function App() {
+  const location = useLocation();
+
   const dispatch = useDispatch();
 
   const loading = useSelector((state) => state.recipes.loading);
@@ -27,6 +29,10 @@ function App() {
     }
     dispatch(fetchRecipes());
   }, []);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0 });
+  }, [location]);
 
   if (loading) {
     return <Loading />;
@@ -46,3 +52,4 @@ function App() {
 }
 
 export default App;
+
