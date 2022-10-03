@@ -5,11 +5,6 @@ const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case LOGIN: {
       const { email, password } = store.getState().user.loginForm;
-      // Objectif haut niveau : envoyer un post à l'api
-      // avec les valeurs du champ email et password
-
-      // Je récupère depuis le store la valeur de email
-      // Je récupère depuis le store la valeur de password
 
       // J'envoie ma requête en POST via axios sur localhost:3001/login
       axios.post('http://localhost:3001/login', { email, password })
